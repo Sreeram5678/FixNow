@@ -86,10 +86,10 @@ export const CivicMapView: React.FC = () => {
   const centerCoords: [number, number] = [selectedTicket.coordinates.lat, selectedTicket.coordinates.lng];
 
   return (
-    <div className="relative w-full h-[calc(100vh-3.5rem)] bg-[#F8FAFC] flex flex-col font-sans text-[13px] text-slate-900 overflow-hidden">
+    <div className="relative w-full h-[calc(100dvh-3.5rem)] md:h-[calc(100vh-4rem)] bg-[#F8FAFC] flex flex-col font-sans text-[13px] text-slate-900 overflow-hidden pb-14 md:pb-0">
       
       {/* Top Floating Controls Bar */}
-      <div className="absolute top-4 inset-x-4 md:left-6 md:right-auto md:w-[480px] z-30 flex flex-col gap-2.5 pointer-events-auto">
+      <div className="absolute top-3 inset-x-3 md:top-4 md:left-6 md:right-auto md:w-[480px] z-30 flex flex-col gap-2 pointer-events-auto">
         {/* Search input with RK badge */}
         <div className="bg-white/95 backdrop-blur-sm border border-slate-200 rounded-xl px-3.5 py-2 flex items-center justify-between shadow-sm">
           <div className="flex items-center gap-2 flex-1">
@@ -216,7 +216,7 @@ export const CivicMapView: React.FC = () => {
 
       {/* Bottom Floating Incident Sheet (Stitch Screen 2) */}
       {sheetVisible && selectedTicket && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[440px] z-30 bg-white border border-[#E2E8F0] rounded-2xl shadow-xl p-5 flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className="absolute bottom-18 md:bottom-6 left-1/2 -translate-x-1/2 w-[94%] max-w-[440px] z-30 bg-white border border-[#E2E8F0] rounded-2xl shadow-xl p-4 sm:p-5 flex flex-col gap-3 sm:gap-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
           
           {/* Sheet Handle */}
           <div className="w-10 h-1 bg-slate-200 rounded-full mx-auto -mt-1 mb-1"></div>

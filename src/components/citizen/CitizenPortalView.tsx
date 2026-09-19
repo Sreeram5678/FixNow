@@ -91,17 +91,17 @@ export const CitizenPortalView: React.FC = () => {
   const isResolved = selectedTicket.status === 'resolved';
 
   return (
-    <div className="flex-1 bg-slate-50 py-8 px-4 sm:px-6 flex flex-col items-center min-h-[calc(100vh-4rem)] font-sans text-slate-900">
+    <div className="flex-1 bg-slate-50 py-4 sm:py-8 px-3 sm:px-6 flex flex-col items-center min-h-[calc(100vh-3.5rem)] font-sans text-slate-900 pb-24 md:pb-8 overflow-x-hidden">
       
       {/* Centered Single Card Container (Simple, basic, featherlight) */}
       <div className="w-full max-w-xl bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden flex flex-col">
         
         {/* Top Header */}
-        <header className="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-white">
+        <header className="px-4 sm:px-5 py-3.5 border-b border-slate-200 flex items-center justify-between bg-white">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
-              FixNow Citizen App
+            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-600">
+              FixNow Citizen
             </span>
             <span className="text-slate-300">•</span>
             <span className="font-mono text-xs font-bold text-slate-900">
@@ -111,25 +111,25 @@ export const CitizenPortalView: React.FC = () => {
 
           <button
             onClick={() => setIsReporting(!isReporting)}
-            className="px-3 py-1.5 bg-slate-900 hover:bg-black text-white text-xs font-semibold rounded-lg flex items-center gap-1 transition-colors"
+            className="px-2.5 sm:px-3 py-1.5 bg-slate-900 hover:bg-black text-white text-[11px] sm:text-xs font-semibold rounded-lg flex items-center gap-1 transition-colors"
           >
             <span className="material-symbols-outlined text-[15px]">add</span>
-            <span>{isReporting ? 'Close Form' : 'Report Defect'}</span>
+            <span>{isReporting ? 'Close' : 'Report Issue'}</span>
           </button>
         </header>
 
-        {/* Quick Report Form Modal / Drawer (No photos needed, just simple fields) */}
+        {/* Quick Report Form Drawer (text-base on mobile prevents iOS auto-zoom!) */}
         {isReporting && (
-          <form onSubmit={handleCreateReport} className="p-5 bg-slate-50 border-b border-slate-200 space-y-3">
+          <form onSubmit={handleCreateReport} className="p-4 sm:p-5 bg-slate-50 border-b border-slate-200 space-y-3 animate-in fade-in duration-200">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-emerald-600 text-[18px]">add_alert</span>
-                Report Broken Public Facility (15-Min Response)
+                Report Defect (15-Min Response)
               </h3>
               <button 
                 type="button" 
                 onClick={() => setIsReporting(false)} 
-                className="text-slate-400 hover:text-slate-700 text-sm"
+                className="text-slate-400 hover:text-slate-700 text-sm p-1"
               >
                 ✕
               </button>
@@ -137,26 +137,26 @@ export const CitizenPortalView: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+                <label className="text-[10px] sm:text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
                   Issue Type
                 </label>
                 <select
                   value={reportCategory}
                   onChange={(e) => setReportCategory(e.target.value as CivicCategory)}
-                  className="w-full h-8 px-2.5 bg-white border border-slate-200 rounded-lg text-xs outline-none"
+                  className="w-full h-9 px-2.5 bg-white border border-slate-200 rounded-lg text-base sm:text-xs text-slate-900 outline-none"
                 >
                   <option value="pothole">Pothole / Broken Road</option>
                   <option value="streetlight">Streetlight Not Working</option>
                   <option value="drainage">Blocked Drain / Overflow</option>
                   <option value="manhole">Damaged Manhole Cover</option>
-                  <option value="water_pipe">Leaking Public Water Pipe</option>
-                  <option value="footpath">Broken Footpath / Paver</option>
+                  <option value="water_pipe">Leaking Water Pipe</option>
+                  <option value="footpath">Broken Footpath</option>
                   <option value="garbage">Garbage Accumulation</option>
                 </select>
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+                <label className="text-[10px] sm:text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
                   Location / Landmark
                 </label>
                 <input
@@ -165,28 +165,28 @@ export const CitizenPortalView: React.FC = () => {
                   value={reportAddress}
                   onChange={(e) => setReportAddress(e.target.value)}
                   placeholder="e.g. 80ft Rd, Opp. Sony Signal"
-                  className="w-full h-8 px-2.5 bg-white border border-slate-200 rounded-lg text-xs outline-none"
+                  className="w-full h-9 px-2.5 bg-white border border-slate-200 rounded-lg text-base sm:text-xs text-slate-900 outline-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
-                Brief Problem Description
+              <label className="text-[10px] sm:text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+                Brief Description
               </label>
               <input
                 type="text"
                 required
                 value={reportTitle}
                 onChange={(e) => setReportTitle(e.target.value)}
-                placeholder="e.g. Dangerous crater damaging two-wheelers"
-                className="w-full h-8 px-2.5 bg-white border border-slate-200 rounded-lg text-xs outline-none"
+                placeholder="e.g. Dangerous crater damaging vehicles"
+                className="w-full h-9 px-2.5 bg-white border border-slate-200 rounded-lg text-base sm:text-xs text-slate-900 outline-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full h-9 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+              className="w-full h-10 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-sm active:bg-emerald-800"
             >
               <span className="material-symbols-outlined text-[16px]">send</span>
               <span>Submit 15-Minute Rapid Fix Alert</span>
@@ -195,34 +195,34 @@ export const CitizenPortalView: React.FC = () => {
         )}
 
         {/* Core Incident Card */}
-        <div className="p-5 border-b border-slate-200 space-y-4">
-          <div className="flex items-start justify-between gap-3">
+        <div className="p-4 sm:p-5 border-b border-slate-200 space-y-3.5 sm:space-y-4">
+          <div className="flex items-start justify-between gap-2">
             <div>
-              <div className="flex items-center gap-2">
-                <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className={`text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded ${
                   isResolved 
                     ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
                     : 'bg-amber-50 text-amber-700 border border-amber-200'
                 }`}>
-                  {isResolved ? '✓ Fixed & Resolved' : 'Crew Active'}
+                  {isResolved ? '✓ Fixed' : 'Crew Active'}
                 </span>
-                <span className="text-xs text-slate-400 font-medium">
+                <span className="text-[11px] sm:text-xs text-slate-400 font-medium">
                   {selectedTicket.categoryName}
                 </span>
               </div>
 
-              <h2 className="text-base font-bold text-slate-900 mt-1.5">
+              <h2 className="text-sm sm:text-base font-bold text-slate-900 mt-1 leading-snug">
                 {selectedTicket.title}
               </h2>
 
-              <div className="flex items-center gap-2 mt-0.5">
-                <p className="text-xs text-slate-500 flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[15px] text-slate-400">location_on</span>
+              <div className="flex flex-wrap items-center gap-2 mt-0.5">
+                <p className="text-[11px] sm:text-xs text-slate-500 flex items-center gap-1">
+                  <span className="material-symbols-outlined text-[14px] text-slate-400">location_on</span>
                   <span>{selectedTicket.coordinates.address}</span>
                 </p>
                 <button
                   onClick={() => setCurrentView('map')}
-                  className="text-[11px] font-semibold text-emerald-700 hover:text-emerald-800 hover:underline"
+                  className="text-[11px] font-semibold text-emerald-700 hover:underline"
                 >
                   View on Map
                 </button>
@@ -230,58 +230,58 @@ export const CitizenPortalView: React.FC = () => {
             </div>
 
             <div className="text-right shrink-0">
-              <span className="text-[10px] uppercase tracking-wider font-semibold text-slate-400 block">
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold text-slate-400 block">
                 Target SLA
               </span>
               <span className="font-mono text-xs font-bold text-slate-900">
-                {isResolved ? 'Resolved in 14m' : selectedTicket.slaTimeLeft}
+                {isResolved ? 'Done in 14m' : selectedTicket.slaTimeLeft}
               </span>
             </div>
           </div>
 
           {/* 15-Minute Progress Stepper */}
-          <div className="pt-2">
+          <div className="pt-2 px-1">
             <div className="relative flex items-center justify-between text-center">
-              <div className="absolute top-3 left-4 right-4 h-[2px] bg-slate-200 z-0"></div>
+              <div className="absolute top-2.5 sm:top-3 left-3 right-3 h-[2px] bg-slate-200 z-0"></div>
               <div 
-                className="absolute top-3 left-4 h-[2px] bg-slate-900 z-0 transition-all duration-500"
+                className="absolute top-2.5 sm:top-3 left-3 h-[2px] bg-slate-900 z-0 transition-all duration-500"
                 style={{ width: isResolved ? '94%' : '66%' }}
               ></div>
 
               {/* Step 1 */}
-              <div className="relative z-10 flex flex-col items-center gap-1 bg-white px-1">
-                <div className="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center text-[12px]">
+              <div className="relative z-10 flex flex-col items-center gap-1 bg-white px-0.5">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-900 text-white flex items-center justify-center text-[10px] sm:text-[12px]">
                   ✓
                 </div>
-                <span className="text-[10px] font-semibold text-slate-900">Reported</span>
+                <span className="text-[9px] sm:text-[10px] font-semibold text-slate-900">Reported</span>
               </div>
 
               {/* Step 2 */}
-              <div className="relative z-10 flex flex-col items-center gap-1 bg-white px-1">
-                <div className="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center text-[12px]">
+              <div className="relative z-10 flex flex-col items-center gap-1 bg-white px-0.5">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-900 text-white flex items-center justify-center text-[10px] sm:text-[12px]">
                   ✓
                 </div>
-                <span className="text-[10px] font-semibold text-slate-900">Assigned</span>
+                <span className="text-[9px] sm:text-[10px] font-semibold text-slate-900">Assigned</span>
               </div>
 
               {/* Step 3 */}
-              <div className="relative z-10 flex flex-col items-center gap-1 bg-white px-1">
-                <div className="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center text-[12px]">
+              <div className="relative z-10 flex flex-col items-center gap-1 bg-white px-0.5">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-slate-900 text-white flex items-center justify-center text-[10px] sm:text-[12px]">
                   ✓
                 </div>
-                <span className="text-[10px] font-semibold text-slate-900">En Route</span>
+                <span className="text-[9px] sm:text-[10px] font-semibold text-slate-900">En Route</span>
               </div>
 
               {/* Step 4 */}
-              <div className="relative z-10 flex flex-col items-center gap-1 bg-white px-1">
-                <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[12px] ${
+              <div className="relative z-10 flex flex-col items-center gap-1 bg-white px-0.5">
+                <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[10px] sm:text-[12px] ${
                   isResolved 
                     ? 'bg-emerald-600 text-white' 
                     : 'bg-white border-2 border-slate-300 text-slate-400'
                 }`}>
                   {isResolved ? '✓' : '4'}
                 </div>
-                <span className={`text-[10px] font-semibold ${isResolved ? 'text-emerald-700' : 'text-slate-400'}`}>
+                <span className={`text-[9px] sm:text-[10px] font-semibold ${isResolved ? 'text-emerald-700' : 'text-slate-400'}`}>
                   Fixed
                 </span>
               </div>
@@ -289,29 +289,29 @@ export const CitizenPortalView: React.FC = () => {
           </div>
         </div>
 
-        {/* 3 Core Answers (Whom to contact, Has anyone reported, When will it be fixed) */}
-        <div className="p-5 border-b border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+        {/* 3 Core Answers (Mobile-friendly stacked cards) */}
+        <div className="p-4 sm:p-5 border-b border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           
           {/* Answer 1: Has anyone reported it? */}
-          <div className="p-3.5 bg-slate-50 rounded-lg border border-slate-100 flex flex-col justify-between space-y-2">
+          <div className="p-3 sm:p-3.5 bg-slate-50 rounded-lg border border-slate-100 flex flex-col justify-between space-y-2">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
                 Has anyone reported it?
               </span>
               <p className="font-semibold text-slate-900 mt-1">
                 Reported {selectedTicket.reportedTime}
               </p>
-              <p className="text-slate-500 mt-0.5">
+              <p className="text-slate-500 mt-0.5 text-[11px]">
                 {selectedTicket.confirmations} local neighbors confirmed
               </p>
             </div>
 
             <button
               onClick={handleToggleVerification}
-              className={`w-full py-1.5 px-3 rounded-lg font-semibold text-xs flex items-center justify-center gap-1.5 transition-all ${
+              className={`w-full py-2 px-3 rounded-lg font-semibold text-xs flex items-center justify-center gap-1.5 transition-all ${
                 isVerified
                   ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
-                  : 'bg-white border border-slate-200 hover:bg-slate-100 text-slate-800'
+                  : 'bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 active:bg-slate-200'
               }`}
             >
               <span className="material-symbols-outlined text-[16px]">
@@ -322,30 +322,30 @@ export const CitizenPortalView: React.FC = () => {
           </div>
 
           {/* Answer 2: Whom should I contact & When fixed? */}
-          <div className="p-3.5 bg-slate-50 rounded-lg border border-slate-100 flex flex-col justify-between space-y-2">
+          <div className="p-3 sm:p-3.5 bg-slate-50 rounded-lg border border-slate-100 flex flex-col justify-between space-y-2">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
                 Who is fixing it?
               </span>
-              <p className="font-semibold text-slate-900 mt-1">
+              <p className="font-semibold text-slate-900 mt-1 truncate">
                 {selectedTicket.forensic.assignedContractor.split('(')[0]}
               </p>
-              <p className="text-slate-500 font-mono mt-0.5">
-                Vehicle: {selectedTicket.forensic.vehicleNumber}
+              <p className="text-slate-500 font-mono mt-0.5 text-[11px]">
+                {selectedTicket.forensic.vehicleNumber}
               </p>
             </div>
 
             <div className="flex items-center gap-2">
               <button
-                onClick={() => showToast('Calling crew dispatcher...')}
-                className="flex-1 py-1.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-lg font-medium text-xs flex items-center justify-center gap-1"
+                onClick={() => showToast('Connecting to crew dispatcher...')}
+                className="flex-1 py-2 bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-lg font-medium text-xs flex items-center justify-center gap-1 active:bg-slate-200"
               >
                 <span className="material-symbols-outlined text-[15px]">call</span>
                 <span>Call Crew</span>
               </button>
               <button
                 onClick={() => showToast('Chat channel opened with contractor unit.')}
-                className="flex-1 py-1.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-lg font-medium text-xs flex items-center justify-center gap-1"
+                className="flex-1 py-2 bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-lg font-medium text-xs flex items-center justify-center gap-1 active:bg-slate-200"
               >
                 <span className="material-symbols-outlined text-[15px]">chat</span>
                 <span>Message</span>
@@ -356,8 +356,8 @@ export const CitizenPortalView: React.FC = () => {
         </div>
 
         {/* Live Event Timeline */}
-        <div className="p-5 space-y-3">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
+        <div className="p-4 sm:p-5 space-y-2.5">
+          <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 block">
             Public Live Updates &amp; Notes
           </span>
 
@@ -368,11 +368,11 @@ export const CitizenPortalView: React.FC = () => {
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-slate-800">Rapid Response Unit Assigned</span>
+                  <span className="font-semibold text-slate-800">Unit Assigned</span>
                   <span className="text-[10px] font-mono text-slate-400">11m ago</span>
                 </div>
-                <p className="text-slate-600 mt-0.5">
-                  BBMP Rapid Unit #14 dispatched with quick-repair materials.
+                <p className="text-slate-600 mt-0.5 text-[11px]">
+                  BBMP Rapid Unit #14 dispatched with repair materials.
                 </p>
               </div>
             </div>
@@ -386,8 +386,8 @@ export const CitizenPortalView: React.FC = () => {
                   <span className="font-semibold text-slate-800">Incident Logged</span>
                   <span className="text-[10px] font-mono text-slate-400">{selectedTicket.reportedTime}</span>
                 </div>
-                <p className="text-slate-600 mt-0.5">
-                  Reported at {selectedTicket.coordinates.address}. 15-minute SLA timer started.
+                <p className="text-slate-600 mt-0.5 text-[11px]">
+                  Reported at {selectedTicket.coordinates.address}. 15-minute SLA started.
                 </p>
               </div>
             </div>
@@ -398,7 +398,7 @@ export const CitizenPortalView: React.FC = () => {
 
       {/* Toast notification */}
       {toastMsg && (
-        <div className="fixed bottom-6 z-50 bg-slate-900 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-lg animate-in fade-in duration-200">
+        <div className="fixed bottom-18 md:bottom-6 z-50 bg-slate-900 text-white px-4 py-2 rounded-lg text-xs font-medium shadow-lg animate-in fade-in duration-200">
           {toastMsg}
         </div>
       )}
